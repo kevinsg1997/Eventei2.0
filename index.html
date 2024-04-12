@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="hover.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Eventei</title>
+</head>
+<body onload="exibirDataAtual()">
+<!--Menu superior-->
+    <div style="background-color: rgb(42, 123, 170);">
+        <nav class="navbar navbar-expand-lg navmenu" style="background-color: rgb(8, 20, 36);">
+            <div class="container-fluid">
+                <a href="index.html">
+                    <img src="imagens/Logo-Eventei.png" style="margin-left: 15px;" class="img-fluid logo" alt="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-li">
+                        <li class="nav-item libutton">
+                            <a class="nav-link hvr-fade" href="index.html" style="color:white; border-radius: 20px 20px 20px 20px;">Home</a>
+                        </li>
+                        <li class="nav-item libutton">
+                            <a class="nav-link hvr-fade" href="favoritos.html" style="color:white; border-radius: 20px 20px 20px 20px;">Favoritos</a>
+                        </li>
+                        <li class="nav-item libutton">
+                            <a class="nav-link hvr-fade" href="calendario-underconstruction.html" style="color:rgb(87, 87, 87); border-radius: 20px 20px 20px 20px;">Calendário</a>
+                        </li>
+                        <li class="nav-item libutton">
+                            <a class="nav-link hvr-fade" href="organizadores.html" style="color:white; border-radius: 20px 20px 20px 20px;">Organizadores</a>
+                        </li>
+                    <form class="d-flex" role="search" style="margin: auto auto auto 20px; max-height: 40px;">
+                        <input class="form-control me-2" type="search" placeholder="O que procura?" aria-label="Search">
+                        <button type="submit" class="btn btn-outline-secondary" style="font-size:medium; color:white;">Pesquisar</button>
+                    </form>
+                    </ul>
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" style="font-size:medium; margin-left:auto; color:white;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 20 20">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end" style="background-color: rgb(8, 20, 36);">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#Modallogin" style="color: white;">Entrar</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#Modalregistrar" style="color: white;">Registrar</a></li>
+                            <li><hr class="dropdown-divider-white" style="color: white;"></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#Modalesqueci" style="color: white;">Esqueci minha senha</a></li>
+                        </ul>
+                    </li>
+                </div>
+            </div>
+        </nav>
+    </div>
+<!--Conteudo da pagina-->
+    <div class="categorias" style="background-color: rgb(42, 123, 170); margin: 0; padding:0; border-radius: 0 0 20px 20px;" id="idcategorias">
+        <div class="container text-center" style="margin-top: 10px; max-width: 1450px;">
+            <div class="row">
+                <ul class="nav nav-tabs">
+                    <h4 id="categoriaslt" style="margin-left: 30px;">
+                    Selecione sua categoria:
+                    </h4>
+                    <li class="nav-item" data-bs-toggle="collapse" data-bs-target="#categeral" aria-expanded="false" aria-controls="categeral">
+                        <a class="nav-link" href="#" style="color:white;">Geral</a>
+                    </li>
+                    <li class="nav-item" data-bs-toggle="collapse" data-bs-target="#catebaladas" aria-expanded="false" aria-controls="catebaladas">
+                        <a class="nav-link" href="#" style="color:white;">Baladas</a>
+                    </li>
+                    <li class="nav-item" data-bs-toggle="collapse" data-bs-target="#catepraia" aria-expanded="false" aria-controls="catepraia">
+                        <a class="nav-link" href="#" style="color:white;">Praia</a>
+                    </li>
+                    <li class="nav-item" data-bs-toggle="collapse" data-bs-target="#cateteatro" aria-expanded="false" aria-controls="cateteatro">
+                        <a class="nav-link" href="#" style="color:white;">Teatro</a>
+                    </li>
+                    <li class="nav-item" data-bs-toggle="collapse" data-bs-target="#catereligioso" aria-expanded="false" aria-controls="catereligioso">
+                        <a class="nav-link" href="#" style="color:white;">Religioso</a>
+                    </li>
+                    <li class="nav-item" data-bs-toggle="collapse" data-bs-target="#cateshows" aria-expanded="false" aria-controls="cateshows">
+                        <a class="nav-link" href="#" style="color:white;">Shows</a>
+                    </li>
+                    <li class="nav-item" data-bs-toggle="collapse" data-bs-target="#categratuito" aria-expanded="false" aria-controls="categratuito">
+                        <a class="nav-link" href="#" style="color:white;">Gratuitos</a>
+                    </li>
+                </ul>
+<!--Conteudo de categorias-->
+                <div class="collapse fundocollapse" id="categeral" data-bs-parent="#idcategorias">
+                    <div class="card card-body categoriaselecionada" style="color: white;">
+                        <div class="container text-center">
+                            <div class="row align-items-start">
+                                <div class="col finalpagehome">
+                                Eventos gerais
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container text-center" style="background-color: rgb(42, 123, 170); border-radius: 0 0 30px 30px;">
+                            <div class="row align-items-start">
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/cafecura.jpg" class="card-img-top" alt="praia" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Evento X</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/balada_curitiba.jpg" class="card-img-top" alt="balada" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Evento Y</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/curitiba.jpg" class="card-img-top" alt="cidade" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Evento Z</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/Catedral.jpg" class="card-img-top" alt="igreja" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Evento</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ###### </p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+                <div class="collapse fundocollapse" id="catebaladas" data-bs-parent="#idcategorias">
+                    <div class="card card-body categoriaselecionada" style="color: white;">
+                        <div class="container text-center">
+                            <div class="row align-items-start">
+                                <div class="col finalpagehome">
+                                Baladas
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container text-center" style="background-color: rgb(42, 123, 170); border-radius: 0 0 30px 30px;">
+                            <div class="row align-items-start">
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/verdant.jpg" class="card-img-top" alt="praia" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Verdant</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/clubvibe.jpeg" class="card-img-top" alt="balada" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Club Vibe</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/peppers.jpg" class="card-img-top" alt="cidade" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Peppers</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/shedbar.jpeg" class="card-img-top" alt="igreja" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Shed Bar</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ###### </p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+                </div>
+                <div class="collapse fundocollapse" id="catepraia" data-bs-parent="#idcategorias">
+                    <div class="card card-body categoriaselecionada" style="color: white;">
+                        <div class="container text-center">
+                            <div class="row align-items-start">
+                                <div class="col finalpagehome">
+                                Eventos na praia
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container text-center" style="background-color: rgb(42, 123, 170); border-radius: 0 0 30px 30px;">
+                            <div class="row align-items-start">
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/praiavaitesamba.jpg" class="card-img-top" alt="praia" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Vai tê samba</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/ultraparaiasparana.jpg" class="card-img-top" alt="balada" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Ultra Praias Paraná</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/balneario.jpg" class="card-img-top" alt="cidade" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Balneário Camboriú</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/parqueestadualilhadocardoso.jpg" class="card-img-top" alt="igreja" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Ilha do Cardoso</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ###### </p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+                </div>
+                <div class="collapse fundocollapse" id="cateteatro" data-bs-parent="#idcategorias">
+                    <div class="card card-body categoriaselecionada" style="color: white;">
+                        <div class="container text-center">
+                            <div class="row align-items-start">
+                                <div class="col finalpagehome">
+                                Teatros
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container text-center" style="background-color: rgb(42, 123, 170); border-radius: 0 0 30px 30px;">
+                            <div class="row align-items-start">
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/zeramalho.jpeg" class="card-img-top" alt="praia" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Zé Ramalho</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/Oswaldomontenegro.jpg" class="card-img-top" alt="balada" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Oswaldo Montenegro</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/GlennHughes.jpeg" class="card-img-top" alt="cidade" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Glenn Teatro Positivo</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/brasisnopaiol.jpg" class="card-img-top" alt="igreja" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Brasis no Paiol</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ###### </p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+                </div>
+                <div class="collapse fundocollapse" id="catereligioso" data-bs-parent="#idcategorias">
+                    <div class="card card-body categoriaselecionada" style="color: white;">
+                        <div class="container text-center">
+                            <div class="row align-items-start">
+                                <div class="col finalpagehome">
+                                Eventos religiosos
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container text-center" style="background-color: rgb(42, 123, 170); border-radius: 0 0 30px 30px;">
+                            <div class="row align-items-start">
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/flamerichard.jpg" class="card-img-top" alt="praia" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Conferência Flame</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/palestrareligi.png" class="card-img-top" alt="balada" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Palestra Monge Gensho</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/encontrocomdeus.jpg" class="card-img-top" alt="cidade" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Encontro com Deus</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/umbanda.png" class="card-img-top" alt="igreja" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Umbanda Rio</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ###### </p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+                </div>
+                <div class="collapse fundocollapse" id="cateshows" data-bs-parent="#idcategorias">
+                    <div class="card card-body categoriaselecionada" style="color: white;">
+                        <div class="container text-center">
+                            <div class="row align-items-start">
+                                <div class="col finalpagehome">
+                                Shows
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container text-center" style="background-color: rgb(42, 123, 170); border-radius: 0 0 30px 30px;">
+                            <div class="row align-items-start">
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/nxzero.jpeg" class="card-img-top" alt="praia" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">NX Zero Live Curitiba</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/luacity.jpeg" class="card-img-top" alt="balada" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">LUAN CITY FESTIVAL</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/redhotchilli.jpg" class="card-img-top" alt="cidade" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Red Hot Chili Peppers</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/lulusantos].jpg" class="card-img-top" alt="igreja" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Lulu Santos, Barítono</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ###### </p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+                </div>
+                <div class="collapse fundocollapse" id="categratuito" data-bs-parent="#idcategorias">
+                    <div class="card card-body categoriaselecionada" style="color: white;">
+                        <div class="container text-center">
+                            <div class="row align-items-start">
+                                <div class="col finalpagehome">
+                                Eventos gratuitos
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container text-center" style="background-color: rgb(42, 123, 170); border-radius: 0 0 30px 30px;">
+                            <div class="row align-items-start">
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/sulexport.jpg" class="card-img-top" alt="praia" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Sul Export 2023</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/intensivo.jpg" class="card-img-top" alt="balada" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Intensivo em Cântico</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/inovacoesdrones.jpg" class="card-img-top" alt="cidade" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Inovações em Drones</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ######</p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="padding-bottom: 30px;">
+                                    <div class="carddash" style="margin-top: 20px;">
+                                        <img src="imagens/jc-latte.jpg" class="card-img-top" alt="igreja" style="height: 200px; width: 240px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Workshop JC - LATTE</h5>
+                                            <p class="card-text">Data: 00-00-0000 </p>
+                                            <p class="card-text">Local: ###### </p>
+                                            <p class="card-text">Valor: $$$ </p>
+                                            <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                                            <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+<!--Destaques!-->
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col categoriasfavoritos" style="border-right: 1px solid white;">
+            É hojeee!
+            </div>
+            <div class="col organizadoresfavoritos">
+            Em alta!
+            </div>
+            <div class="col locaisfavoritos" style="border-left: 1px solid white;">
+            Recomendações
+            </div>
+        </div>
+    </div>
+    <div class="container text-center" style="background-color: rgb(42, 123, 170); border-radius: 0 0 30px 30px;">
+        <div class="row align-items-start">
+            <div class="col" style="border-right: 1px solid white; padding-bottom: 30px;">
+                <div class="carddash" style="margin-top: 20px;">
+                    <div>
+                        <img src="imagens/calendario.png" class="card-img-top" alt="balada">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Para sair do tédio</h5>
+                        <a href=""><p>Festas</p></a>
+                        <a href=""><p>Bazares</p></a>
+                        <a href=""><p>Cosplay</p></a>
+                        <a href=""><p>Famosos</p></a>
+                        <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Veja Mais!</span></button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="carddash" style="margin-top: 20px;">
+                    <img src="imagens/emalta.jpg" class="card-img-top" alt="balada">
+                    <div class="card-body">
+                        <h5 class="card-title">Veja os mais desejados</h5>
+                        <a href=""><p>Chopada Didi</p></a>
+                        <a href=""><p>Padre Marcelo</p></a>
+                        <a href=""><p>Feira da XV</p></a>
+                        <a href=""><p>DreamLeague</p></a>
+                        <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Veja Mais!</span></button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="border-left: 1px solid white; padding-bottom: 30px;">
+                <div class="carddash" style="margin-top: 20px;">
+                    <div style="position: relative; border: 0;">
+                        <img src="imagens/recomendados.gif" class="card-img-top" alt="balada">
+                        <img src="imagens/duvida.png" class="card-img-top" alt="balada" style="position: absolute; bottom: 0; left: 5px; max-width: 100px; max-height: 120px">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Não tem algo planejado?</h5>
+                        <a href=""><p>Baladas</p></a>
+                        <a href=""><p>Bares</p></a>
+                        <a href=""><p>Praias</p></a>
+                        <a href=""><p>Chácaras</p></a>
+                        <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Veja Mais!</span></button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--Conteudo final Dash-->
+    <br>
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col finalpagehome">
+            Adicionados recentemente
+            </div>
+        </div>
+    </div>
+    <div class="container text-center" style="background-color: rgb(42, 123, 170); border-radius: 0 0 30px 30px;">
+        <div class="row align-items-start">
+            <div class="col" style="padding-bottom: 30px;">
+                <div class="carddash" style="margin-top: 20px;">
+                    <img src="imagens/cafecura.jpg" class="card-img-top" alt="praia" style="height: 200px; width: 240px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Evento X</h5>
+                        <p class="card-text">Data: 00-00-0000 </p>
+                        <p class="card-text">Local: ######</p>
+                        <p class="card-text">Valor: $$$ </p>
+                        <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                        <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="padding-bottom: 30px;">
+                <div class="carddash" style="margin-top: 20px;">
+                    <img src="imagens/balada_curitiba.jpg" class="card-img-top" alt="balada" style="height: 200px; width: 240px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Evento Y</h5>
+                        <p class="card-text">Data: 00-00-0000 </p>
+                        <p class="card-text">Local: ######</p>
+                        <p class="card-text">Valor: $$$ </p>
+                        <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                        <a href="Eventos/evento-y.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="padding-bottom: 30px;">
+                <div class="carddash" style="margin-top: 20px;">
+                    <img src="imagens/curitiba.jpg" class="card-img-top" alt="cidade" style="height: 200px; width: 240px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Evento Z</h5>
+                        <p class="card-text">Data: 00-00-0000 </p>
+                        <p class="card-text">Local: ######</p>
+                        <p class="card-text">Valor: $$$ </p>
+                        <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                        <a href="Eventos/evento-z.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="padding-bottom: 30px;">
+                <div class="carddash" style="margin-top: 20px;">
+                    <img src="imagens/Catedral.jpg" class="card-img-top" alt="igreja" style="height: 200px; width: 240px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Evento</h5>
+                        <p class="card-text">Data: 00-00-0000 </p>
+                        <p class="card-text">Local: ###### </p>
+                        <p class="card-text">Valor: $$$ </p>
+                        <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                        <a href="Eventos/evento.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="padding-bottom: 30px;">
+                <div class="carddash" style="margin-top: 20px;">
+                    <img src="imagens/evento1.jpeg" class="card-img-top" alt="igreja" style="height: 200px; width: 240px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Evento</h5>
+                        <p class="card-text">Data: 00-00-0000 </p>
+                        <p class="card-text">Local: ###### </p>
+                        <p class="card-text">Valor: $$$ </p>
+                        <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                        <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="padding-bottom: 30px;">
+                <div class="carddash" style="margin-top: 20px;">
+                    <img src="imagens/evento2.png" class="card-img-top" alt="igreja" style="height: 200px; width: 240px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Evento</h5>
+                        <p class="card-text">Data: 00-00-0000 </p>
+                        <p class="card-text">Local: ###### </p>
+                        <p class="card-text">Valor: $$$ </p>
+                        <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                        <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Saiba Mais!</span></button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="padding-bottom: 30px;">
+                <div class="carddash" style="margin-top: 20px;">
+                    <img src="imagens/evento3.jpg" class="card-img-top" alt="igreja" style="height: 200px; width: 240px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Evento</h5>
+                        <p class="card-text">Data: 00-00-0000 </p>
+                        <p class="card-text">Local: ###### </p>
+                        <p class="card-text">Valor: $$$ </p>
+                        <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                        <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Veja Mais!</span></button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="padding-bottom: 30px;">
+                <div class="carddash" style="margin-top: 20px;">
+                    <img src="imagens/evento4.jpg" class="card-img-top" alt="igreja" style="height: 200px; width: 240px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Evento</h5>
+                        <p class="card-text">Data: 00-00-0000 </p>
+                        <p class="card-text">Local: ###### </p>
+                        <p class="card-text">Valor: $$$ </p>
+                        <p class="card-text">Descrição: XXXXXXXXXX <br> XXXXXXXXXX </p>
+                        <a href="Eventos/evento-x.html"><button class="btn btn-primary" role="button"><span class="text">Veja Mais!</span></button></a>
+                    </div>
+                </div>
+            </div>
+            <!-- adicionar botão<div class="col finalpagehomebaixo" style="padding-bottom: 10px; height: 50px;">
+                <button type="button" class="btn btn-danger">Ver todos!</button>
+            </div>-->
+        </div>
+    </div>
+<!--Modal Login-->
+    <div class="modal fade" id="Modallogin" tabindex="-1" aria-labelledby="Moldalloginconteudo" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color: rgb(8, 20, 36); border: 1px solid white;">
+                <div class="modal-header" data-bs-theme="dark">
+                    <h1 class="modal-title fs-5" id="Modalloginconteudo" style="color: white;">Entrar</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="color: white;">
+                    <div class="modallogin">
+                        <h2>Página de Login</h2>
+                        <form>
+                          <label for="username">Usuário:</label>
+                          <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário">
+                          <label for="password">Senha:</label>
+                          <input type="password" id="password" name="password" placeholder="Digite sua senha">
+                          <button type="submit" onclick="handleFormSubmit()">Entrar</button> <!--Alterar para o banco de dados-->
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-body" style="color: white;">
+                    <div class="modallogin">
+                        <h2>Exemplos:</h2>
+                        <form>
+                            <a class="buttonexemplos" href="index-login-underconstruction.html" target="_blank" style="font-style: normal; text-align: center;">Usuário</a>
+                            <a class="buttonexemplos" href="index-organizador-underconstruction.html" target="_blank" style="font-style: normal; text-align: center;">Organizador</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--Modal Registrar-->
+    <div class="modal fade" id="Modalregistrar" tabindex="-1" aria-labelledby="Moldalregistrarconteudo" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color: rgb(8, 20, 36); border: 1px solid white;">
+                <div class="modal-header" data-bs-theme="dark">
+                    <h1 class="modal-title fs-5" id="Modalregistrarconteudo" style="color: white;">Registrar</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="color: white;">
+                    <div class="registrar">
+                        <h2>Registrar</h2>
+                        <form id="registerForm">
+                        <label for="newUsername">Novo Usuário:</label>
+                        <input type="text" id="newUsername" name="newUsername" placeholder="Digite o novo nome de usuário">
+                        <label for="newEmail">E-mail:</label>
+                        <input type="Email" id="newEmail" name="newEmail" placeholder="Digite seu E-mail">
+                        <label for="newPassword">Senha:</label>
+                        <input type="password" id="newPassword" name="newPassword" placeholder="Digite a nova senha">
+                        <label for="newPassword">Repita a senha:</label>
+                        <input type="password" id="newPassword" name="newPassword" placeholder="Digite a senha novamente">
+                        <button type="submit" onclick="handleRegistrationSubmit()">Registrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--Modal Esqueci-senha-->
+    <div class="modal fade" id="Modalesqueci" tabindex="-1" aria-labelledby="Moldalesqueciconteudo" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color: rgb(8, 20, 36); border: 1px solid white;">
+                <div class="modal-header" data-bs-theme="dark">
+                    <h1 class="modal-title fs-5" id="Modalesqueciconteudo" style="color: white;">Recuperar senha</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="color: white;">
+                    <div class="esquecisenha">
+                        <h2>Esqueceu sua senha?</h2>
+                        <form id="forgotPasswordForm">
+                          <label for="email">E-mail:</label>
+                          <input type="email" id="email" name="email" placeholder="Digite o seu e-mail">
+                    
+                          <button type="submit">Redefinir Senha</button>
+                        </form>
+                    
+                        <div id="resetSuccessMessage" style="display: none;">
+                          <p>Um e-mail com as instruções para redefinir a sua senha foi enviado para o endereço fornecido.</p>
+                          <p>Por favor, verifique a sua caixa de entrada.</p>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--Rodape-->
+    <footer>
+        <div class="contatos">
+            <div class="container text-center" style="margin-top: 10px; max-width: 1450px;">
+                <div class="row">
+                    <ul class="nav nav-tabs contatos1" style="border: 0;">
+                        <i class="fa-solid fa-phone fa-lg" style="color: #fafafa;"></i><a href="https://wa.me/41988776655" target="_blank">(41) 98877-6655</a>
+                        <i class="fa-solid fa-square-envelope fa-xl" style="color: #ffffff;"></i><a href="mailto:contato@eventei.com.br" target="_blank">contato@eventei.com.br</a>
+                        <i class="fa-brands fa-facebook fa-xl" style="color: #fcfcfc;"></i><a href="https://www.facebook.com/" target="_blank">Eventei!</a>
+                        <i class="fa-solid fa-location-dot fa-xl" style="color: #fcfcfc;"></i><a style="margin-right: 0px;" href="https://goo.gl/maps/3EAKuBrMpWdWGXJv6" target="_blank">Av. Pres. Getúlio Vargas, Rebouças</a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,538 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+Pro:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@500;700&display=swap');
+/* 
+font-family: 'Bebas Neue', sans-serif;
+font-family: 'Source Sans Pro', sans-serif;
+
+font-family: 'Wix Madefor Display', sans-serif;
+*/
+/*
+API KEY
+AIzaSyCZuAa8PqpG9O8kXGhMay7SHZsg3HO_QSo
+*/
+body{
+    background-color: rgb(51, 156, 218);
+    margin: 0px;
+}
+.libutton{
+  padding-right: 10px;
+  border-right: 2px solid #7c7c7c;
+}
+li a{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.nav-link{
+    font-size: 25px;
+    color: #000000;
+    margin-left: 7px;
+    margin-top: 5px;
+}
+nav{
+    background-color: #000000;
+    border-radius: 0px 0px 20px 20px;
+    position: sticky;
+    top: 0px;
+    z-index: 99;
+}
+.nav-item{
+    margin-left: 10px;
+}
+.logo{
+    width: 50px;
+    height: 50px;
+    max-width: 60px;
+    max-height: 60px;
+    float: left;
+    margin-right: 30px;
+    margin-top: 3px;
+    animation-name: fadeInLeft;
+    animation-duration: 2s;
+}
+.dropdown-item:hover{
+  background-color: black;
+}
+.logo{
+    max-width: 60px;
+    max-height: 60px;
+    float: left;
+    margin-right: 30px;
+    margin-top: 3px;
+}
+#categoriaslt{
+    font-family: 'Bebas Neue', sans-serif;
+    color: #ffffff;
+    font-size: 30px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    text-shadow: 0 0 5px #000000, 0 0 5px #1100ff;
+}
+.categorias{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.categorias a{
+    text-decoration: none;
+}
+.categorias button{
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+}
+.card{
+    background-color: rgb(18, 43, 78);
+    margin: auto;
+}
+.card p{
+    text-align: left;
+    color: #ffffff;
+    font-family: 'Source Sans Pro', sans-serif;
+    line-height: 15px;
+}
+.card h5{
+    color: #ffffff;
+    font-weight: 700;
+}
+.card img{
+    width: 100%;
+    max-width: 450px;
+    height: 250px;
+    margin: auto;
+}
+.card a{
+    text-decoration: none;
+}
+#destaquegeral h4{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+}
+#textprincipal{
+    font-family: 'Bebas Neue', sans-serif;
+    color: #ffffff;
+    font-size: 50px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: -50px;
+    text-shadow: 0 0 5px #000000, 0 0 5px #1100ff;
+}
+/*
+Footer
+*/
+.contatos{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    background-color: rgb(8, 20, 36);
+    margin-top: 30px;
+    border-radius: 30px 30px 0 0;
+}
+.contatos a{
+    margin: auto;
+}
+.contatos1{
+    width: 100%;
+    max-width: 95%;
+    height: auto;
+    overflow: hidden;
+    margin: auto;
+    background-color: rgb(8, 20, 36);
+    display: flex;
+    align-items: center;
+}
+.contatos1 i{
+    margin-right: 5px;
+}
+.contatos1 a{
+    display: inline-block;
+    color: white;
+    font-family:Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 0;
+}
+/*
+<!-- HTML !-->
+<button class="button-64" role="button"><span class="text">Button 64</span></button> */
+
+/* CSS */
+.button-64 {
+    align-items: center;
+    background-image: linear-gradient(144deg,#2e1bd6, #2f22e4 50%,#094aac);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(86, 54, 230, 0.274) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 100%;
+    min-width: 130px;
+    padding: 2px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    margin: auto;
+}
+
+.button-64:active, .button-64:hover {
+  outline: 0;
+}
+
+.button-64 span {
+  background-color: rgb(5, 6, 45);
+  padding: 16px 24px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+}
+
+.button-64:hover span {
+  background: none;
+}
+
+@media (min-width: 768px) {
+  .button-64 {
+    font-size: 24px;
+    min-width: 196px;
+  }
+}
+.fadeInLeft {
+    -webkit-animation-name: fadeInLeft;
+    animation-name: fadeInLeft;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    }
+    @-webkit-keyframes fadeInLeft {
+    0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    }
+    100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+    }
+    }
+    @keyframes fadeInLeft {
+    0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    }
+    100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+    }
+}
+#cafecurabanner {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    overflow: hidden;
+    background-color: #000000;
+    margin:auto;
+    background-image: url(../Eventos/imagens/cafecura1.jpg);
+    border-radius: 15px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#baladabanner{
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    overflow: hidden;
+    background-color: #000000;
+    margin:auto;
+    background-image: url(../Eventos/imagens/balada1.jpg);
+    border-radius: 15px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#catedralbanner{
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    overflow: hidden;
+    background-color: #000000;
+    margin:auto;
+    background-image: url(../Eventos/imagens/catedral1.jpg);
+    border-radius: 15px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#cafecura img, #curitiba img, #balada img, #catedral img{
+    max-width: 700px;
+    height: 400px;
+    display: inline-block;
+    margin: auto;
+    margin-left: 10%;
+}
+.banner-event{
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    overflow: hidden;
+    background-color: #000000;
+    margin:auto;
+    background-image: url(../Eventos/imagens/curitiba1.jpg);
+    border-radius: 15px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#eventoz h4{
+    color: #FFFFFF;
+    font-weight: 700;
+    text-shadow: 0 0 5px #000000, 0 0 5px #1100ff;
+    font-size: 40px;
+}
+.card-header{
+    color: #FFFFFF;
+}
+.card-body{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.btn-group{
+    width: 100%;
+    max-width: 50px;
+    height: 60px;
+    margin: 25px;
+    float: right;
+}
+.btn-group p{
+    margin: 0px;
+}
+.btn-group label{
+    border: solid #9c9c9c;
+    color: #ffffff;
+}
+iframe{
+    margin: -15px;
+}
+.accordion{
+    background-color: transparent !important;
+    width: 100%;
+}
+.accordion-button, .accordion-header{
+    background-color: transparent;
+}
+.accordion button:hover{
+    color: #ffffff;
+    background-color: rgb(20,44,76);
+}
+.accordion-button:not(.collapsed) {
+    background-color: rgb(20,44,76);
+    color: aliceblue;
+    box-shadow: none;
+}
+.accordion-button::after{
+    background-image: none;
+    content:"\f0d7";
+    color: #000000;
+    font-family: fontawesome;
+    width: auto;
+    height: auto;
+}
+.accordion-body {
+    background-color: #ffffff;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+}
+.accordion-item{
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+hr{
+    border: none;
+    box-shadow: 1px 1px 1px 1px #2b2b2b;
+}
+#descricao h4{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 30px;
+    text-shadow: 0 0 5px #000000, 0 0 5px #1100ff;;
+}
+#descricao p{
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+}
+.vl {
+    border-left: 3px solid #2b2b2b;
+    height: 170px;
+    width: 100%;
+    max-width: 10px;
+    margin-left: 45px;
+    float: left;
+}
+#othersevents h4{
+    margin-top: 35px;
+    margin-bottom: 35px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+/* Css da criação de eventos */
+
+#accordionExample input, #accordionExample select,#accordionExample textarea{
+    box-shadow: none;
+    background-color: rgba(220, 234, 253, 0.685);
+}
+#accordionExample input:active{
+    border-color: #14cec5;
+}
+#accordionExample label,#accordionExample p, #forPag span{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    text-shadow: 0 0 1px #173349, 0 0 1px #2d22c5;
+}
+.form-switch .form-check-input {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='black'/%3e%3c/svg%3e");
+}
+#Criaevent h4{
+    color: #FFFFFF;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+}
+#Criaevent p{
+    color: #FFFFFF;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    
+}
+#textbox{
+    display: flex;
+    flex-direction: column;
+}
+#testbox input{
+    appearance: none;
+
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+
+    border: 2px solid #476797;
+    transition: 0.2s all linear;
+    margin-right: 5px;
+
+    position: relative;
+    top: 4px;
+
+    display: inline-block;
+}
+
+#testbox input:checked {
+    border: 6px solid rgb(41, 54, 167);
+  }
+  
+#testbox label {
+    display: inline-block;
+    margin-right: 10px;
+    width: 70px;
+    vertical-align: middle;
+  }
+#pformPag{
+    max-width: 300px;
+    margin: auto;
+    border-radius: 5px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 132, 255, 0.377),
+            1px 2px 4px 0px rgba(28, 42, 88, 0.7),
+            2px 4px 8px 0px rgba(0,132, 255,0.377),
+            2px 4px 16px 0px rgba(0,132, 255,0.377);
+    font-size: 20px;
+}
+
+/* Css para perfil do usuario */
+
+.perfilcard{
+    width: 100%;
+    max-width: 350px;
+    height: 400px;
+    border: 3px solid #0000009f;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.63);
+}
+.perfilcard p, .perfilcard span{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    color: #000000;
+}
+
+#imgUser{
+    max-width: 150px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    background-color: rgba(255, 255, 255, 0.342);
+    color: #fff;
+}
+#editUser a{
+    text-emphasis: none;
+    color: #000000;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#editUser i:hover{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+/**/
+.minievent{
+    width: 500px;
+    max-width: 500px;
+    height: 100px;
+    border: 2px solid #000000;
+    background-image: url(../imagens/balada_curitiba.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px;
+}
+.minievent a, .minifav a, .minifav2 a{
+    text-decoration: none;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+    text-shadow: 1px 1px #000000;
+    font-size: 40px;
+}
+.minifav{
+    width: 500px;
+    max-width: 500px;
+    height: 100px;
+    border: 2px solid #000000;
+    background-image: url(../imagens/cafecura.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px;
+}
+.minifav2{
+    width: 500px;
+    max-width: 500px;
+    height: 100px;
+    border: 2px solid #000000;
+    background-image: url(../imagens/curitiba.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px;
+}
