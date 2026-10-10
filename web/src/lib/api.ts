@@ -64,7 +64,17 @@ export const api = {
   },
   getEvent: (id: string) => apiFetch<{ event: ApiEvent }>(`/events/${id}`),
   syncProviders: () =>
-    apiFetch<{ upserted: number }>("/providers/sync", { method: "POST" }),
+    apiFetch<{
+      upserted: number;
+      summaries?: Array<{
+        id: string;
+        label: string;
+        configured: boolean;
+        mode: "live" | "stub" | "unavailable";
+        count: number;
+        error?: string;
+      }>;
+    }>("/providers/sync", { method: "POST" }),
   listFavorites: () =>
     apiFetch<{ favorites: { id: string; event: ApiEvent }[] }>("/favorites"),
   addFavorite: (eventId: string) =>

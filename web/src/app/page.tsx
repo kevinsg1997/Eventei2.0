@@ -10,6 +10,7 @@ export default function HomePage() {
   const [q, setQ] = useState("");
   const [freeOnly, setFreeOnly] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [syncNote, setSyncNote] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
   const load = (filters?: { city?: string; q?: string; free?: boolean }) => {
@@ -28,14 +29,33 @@ export default function HomePage() {
     });
   };
 
+  const syncSources = async (force = false) => {
+    startTransition(async () => {
+      try {
+        setSyncNote(force ? "Sincronizando fontes..." : null);
+        const result = await api.syncProviders();
+        const summary = result.summaries
+          ?.map((s) => `${s.label}: ${s.count} (${s.mode})`)
+          .join(" · ");
+        setSyncNote(summary ? `Fontes atualizadas — ${summary}` : `Upsert: ${result.upserted}`);
+        load({ city, q, free: freeOnly });
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Falha no sync");
+      }
+    });
+  };
+
   useEffect(() => {
     (async () => {
       try {
-        await api.syncProviders();
+        const data = await api.listEvents();
+        setEvents(data.events);
+        if (data.events.length === 0) {
+          await syncSources(true);
+        }
       } catch {
-        /* sync is best-effort on first load */
+        await syncSources(true);
       }
-      load();
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -70,7 +90,7 @@ export default function HomePage() {
       </section>
 
       <section id="lista" className="mx-auto max-w-6xl px-4 py-12 md:px-6">
-        <div className="panel mb-8 grid gap-3 p-4 md:grid-cols-[1fr_1fr_auto_auto] md:items-end">
+        <div className="panel mb-8 grid gap-3 p-4 md:grid-cols-[1fr_1fr_auto_auto_auto] md:items-end">
           <label className="field">
             <span className="text-sm muted">Buscar</span>
             <input
@@ -103,12 +123,23 @@ export default function HomePage() {
           >
             {pending ? "Filtrando..." : "Filtrar"}
           </button>
+          <button
+            type="button"
+            className="btn btn-ghost"
+            disabled={pending}
+            onClick={() => syncSources(true)}
+          >
+            Atualizar fontes
+          </button>
         </div>
+
+        {syncNote && (
+          <p className="mb-4 text-sm text-[var(--accent-2)]">{syncNote}</p>
+        )}
 
         {error && (
           <p className="mb-4 rounded-2xl border border-red-400/40 bg-red-500/10 px-4 py-3 text-sm">
-            {error}. Confira se a API está rodando em{" "}
-            <code>localhost:4000</code>.
+            {error}. Confira se a API está rodando.
           </p>
         )}
 

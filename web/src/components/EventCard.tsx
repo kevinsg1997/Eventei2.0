@@ -28,6 +28,9 @@ export function EventCard({ event }: { event: ApiEvent }) {
         <span className="absolute left-3 top-3 rounded-full bg-black/45 px-3 py-1 text-xs backdrop-blur">
           {event.isFree ? "Gratuito" : event.priceLabel ?? "Pago na fonte"}
         </span>
+        <span className="absolute right-3 top-3 rounded-full bg-black/45 px-3 py-1 text-xs capitalize backdrop-blur">
+          {event.source.replace("_", " ")}
+        </span>
       </div>
       <div className="space-y-2 p-4">
         <p className="text-xs uppercase tracking-[0.14em] text-[var(--accent-2)]">

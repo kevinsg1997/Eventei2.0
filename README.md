@@ -2,7 +2,7 @@
 
 Plataforma para descobrir eventos no Brasil (Ticketmaster e outras fontes) e cadastrar **somente eventos gratuitos**.
 
-## Stack (Fase 1)
+## Stack
 
 | Parte | Tecnologia | Deploy alvo |
 |-------|------------|-------------|
@@ -13,7 +13,7 @@ Plataforma para descobrir eventos no Brasil (Ticketmaster e outras fontes) e cad
 ## Estrutura
 
 ```
-api/       API + auth + providers (stubs)
+api/       API + auth + providers (Ticketmaster, Mapa da Cultura, Subcena)
 web/       Frontend Next.js
 legacy/    Protótipo HTML antigo (faculdade)
 ```
@@ -80,9 +80,34 @@ Callbacks Better Auth (ajuste ao domínio da API):
 - `{BETTER_AUTH_URL}/api/auth/callback/github`
 - `{BETTER_AUTH_URL}/api/auth/callback/apple`
 
-## Ticketmaster
+## Providers de eventos (Fase 2)
 
-`TICKETMASTER_API_KEY` pode ficar vazia na Fase 1. Os providers usam stubs até a Fase 2.
+### Ticketmaster
+No portal Ticketmaster você vê **Consumer Key** e **Consumer Secret**:
+
+| Campo no portal | Variável no `api/.env` / Railway | Uso |
+|-----------------|----------------------------------|-----|
+| Consumer Key | `TICKETMASTER_API_KEY` (ou `TICKETMASTER_CONSUMER_KEY`) | Discovery API (`apikey`) — **obrigatória** para inventário BR ao vivo |
+| Consumer Secret | `TICKETMASTER_CONSUMER_SECRET` | Reservada (OAuth/commerce). A Discovery pública **não** usa |
+
+Não cole as keys no chat/git. Coloque só no `.env` local e nas env vars do Railway.
+
+Sync manual:
+
+```bash
+curl -X POST http://localhost:4000/providers/sync
+```
+
+A resposta inclui `summaries` com `mode` (`live` | `stub` | `unavailable`) por fonte.
+
+### Mapa da Cultura
+API pública. Em alguns ambientes (Cloudflare) pode bloquear; nesse caso o sync cai para stub se `ALLOW_PROVIDER_STUBS=true`.
+
+### Subcena
+API pública por cidade (BH, RJ, SP). Integração live sem chave.
+
+### Sync automático
+Defina `PROVIDER_SYNC_INTERVAL_MS=3600000` (1h) na API para sincronizar em background.
 
 ## Admin — Pendências
 

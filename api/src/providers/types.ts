@@ -1,3 +1,5 @@
+export type ProviderId = "ticketmaster" | "mapa_cultura" | "subcena";
+
 export type NormalizedEvent = {
   externalId: string;
   title: string;
@@ -14,12 +16,22 @@ export type NormalizedEvent = {
   isFree: boolean;
   priceLabel?: string | null;
   externalUrl?: string | null;
-  source: "ticketmaster" | "mapa_cultura" | "subcena";
+  source: ProviderId;
+};
+
+export type ProviderFetchResult = {
+  events: NormalizedEvent[];
+  mode: "live" | "stub" | "unavailable";
+  error?: string;
 };
 
 export type EventProvider = {
-  id: NormalizedEvent["source"];
+  id: ProviderId;
   label: string;
   configured: boolean;
-  fetchBrazilEvents: () => Promise<NormalizedEvent[]>;
+  fetchBrazilEvents: () => Promise<ProviderFetchResult>;
 };
+
+export function allowProviderStubs() {
+  return process.env.ALLOW_PROVIDER_STUBS !== "false";
+}

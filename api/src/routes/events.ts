@@ -2,7 +2,8 @@ import type { FastifyInstance } from "fastify";
 import { z } from "zod";
 import { prisma } from "../lib/prisma.js";
 import { requireUser } from "../lib/session.js";
-import { fetchAllProviderEvents, providerStatus } from "../providers/index.js";
+import { providerStatus } from "../providers/index.js";
+import { syncProviderEvents } from "../services/sync-events.js";
 
 const createEventSchema = z.object({
   title: z.string().min(3).max(160),
@@ -104,57 +105,12 @@ export async function eventRoutes(app: FastifyInstance) {
   app.get("/providers/status", async () => ({ providers: providerStatus() }));
 
   app.post("/providers/sync", async (_request, reply) => {
-    const incoming = await fetchAllProviderEvents();
-    let upserted = 0;
-
-    for (const item of incoming) {
-      await prisma.event.upsert({
-        where: {
-          source_externalId: {
-            source: item.source,
-            externalId: item.externalId,
-          },
-        },
-        create: {
-          title: item.title,
-          description: item.description,
-          startsAt: new Date(item.startsAt),
-          endsAt: item.endsAt ? new Date(item.endsAt) : null,
-          city: item.city,
-          state: item.state ?? null,
-          country: item.country,
-          address: item.address ?? null,
-          venueName: item.venueName ?? null,
-          category: item.category ?? null,
-          imageUrl: item.imageUrl ?? null,
-          isFree: item.isFree,
-          priceLabel: item.priceLabel ?? null,
-          externalUrl: item.externalUrl ?? null,
-          source: item.source,
-          externalId: item.externalId,
-          published: true,
-        },
-        update: {
-          title: item.title,
-          description: item.description,
-          startsAt: new Date(item.startsAt),
-          endsAt: item.endsAt ? new Date(item.endsAt) : null,
-          city: item.city,
-          state: item.state ?? null,
-          address: item.address ?? null,
-          venueName: item.venueName ?? null,
-          category: item.category ?? null,
-          imageUrl: item.imageUrl ?? null,
-          isFree: item.isFree,
-          priceLabel: item.priceLabel ?? null,
-          externalUrl: item.externalUrl ?? null,
-          published: true,
-        },
-      });
-      upserted += 1;
-    }
-
-    return reply.send({ upserted, providers: providerStatus() });
+    const { upserted, summaries } = await syncProviderEvents();
+    return reply.send({
+      upserted,
+      providers: providerStatus(),
+      summaries,
+    });
   });
 }
 

@@ -8,9 +8,11 @@ import { calendarRoutes } from "./routes/calendar.js";
 import { eventRoutes } from "./routes/events.js";
 import { favoriteRoutes } from "./routes/favorites.js";
 import { reportRoutes } from "./routes/reports.js";
+import { syncProviderEvents } from "./services/sync-events.js";
 
 const port = Number(process.env.PORT ?? 4000);
 const webUrl = process.env.WEB_URL ?? "http://localhost:3000";
+const syncIntervalMs = Number(process.env.PROVIDER_SYNC_INTERVAL_MS ?? 0);
 
 async function main() {
   const app = Fastify({ logger: true });
@@ -42,7 +44,7 @@ async function main() {
   app.get("/health", async () => ({
     ok: true,
     service: "eventei-api",
-    phase: 1,
+    phase: 2,
   }));
 
   await app.register(eventRoutes);
@@ -53,6 +55,23 @@ async function main() {
 
   await app.listen({ port, host: "0.0.0.0" });
   console.log(`Eventei API listening on http://localhost:${port}`);
+
+  // Optional periodic sync (set PROVIDER_SYNC_INTERVAL_MS, e.g. 3600000).
+  if (syncIntervalMs > 0) {
+    const runSync = async () => {
+      try {
+        const result = await syncProviderEvents();
+        app.log.info(
+          { upserted: result.upserted, summaries: result.summaries },
+          "provider sync completed",
+        );
+      } catch (error) {
+        app.log.error(error, "provider sync failed");
+      }
+    };
+    setTimeout(runSync, 5_000);
+    setInterval(runSync, syncIntervalMs);
+  }
 }
 
 main().catch((error) => {
