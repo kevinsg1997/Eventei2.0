@@ -10,7 +10,8 @@
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "test:providers": "tsx src/providers/ticketmaster.test.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
