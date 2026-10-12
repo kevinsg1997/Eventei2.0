@@ -6,23 +6,23 @@ Plataforma para descobrir eventos no Brasil (Ticketmaster e outras fontes) e cad
 
 | Parte | Tecnologia | Deploy alvo |
 |-------|------------|-------------|
-| Front | Next.js + React | Vercel |
-| API | Fastify + Better Auth + Prisma | Railway |
+| Front | Next.js + React (raiz do repo) | Vercel |
+| API | Fastify + Better Auth + Prisma (`backend/`) | Railway |
 | Banco | PostgreSQL | Railway |
 
 ## Estrutura
 
 ```
-api/       API + auth + providers (Ticketmaster, Mapa da Cultura, Subcena)
-web/       Frontend Next.js
-legacy/    Protótipo HTML antigo (faculdade)
+src/         Frontend Next.js (App Router)
+backend/     API + auth + providers
+legacy/      Protótipo HTML antigo (faculdade)
 ```
 
 ## Desenvolvimento local
 
 ### Pré-requisitos
 
-- Node.js 24.x (Vercel / engines)
+- Node.js 24.x (Vercel / `engines`)
 - PostgreSQL
 
 ### Banco
@@ -32,19 +32,19 @@ legacy/    Protótipo HTML antigo (faculdade)
 createdb eventei
 ```
 
-Configure `api/.env` (há `.env.example`):
+Configure `backend/.env` (há `.env.example`):
 
 ```env
 DATABASE_URL="postgresql://eventei:eventei@localhost:5432/eventei?schema=public"
 BETTER_AUTH_SECRET="troque-por-um-segredo-longo"
-BETTER_AUTH_URL="http://localhost:4000"
+BETTER_AUTH_URL="http://localhost:3000"
 WEB_URL="http://localhost:3000"
 ```
 
 ### API
 
 ```bash
-cd api
+cd backend
 npm install
 npx prisma migrate dev
 npm run db:seed
@@ -58,12 +58,11 @@ Contas seed:
 - Admin: `admin@eventei.local` / `Admin123!`
 - Demo: `demo@eventei.local` / `Demo1234!`
 
-### Web
+### Web (raiz)
 
 ```bash
-cd web
 npm install
-cp .env.example .env.local
+cp .env.example .env.local   # se existir; senão crie NEXT_PUBLIC_API_URL
 npm run dev
 ```
 
@@ -71,13 +70,15 @@ Front em `http://localhost:3000`.
 
 ### Vercel (preview)
 
-O app Next.js fica em `web/`. O repositório inclui `vercel.json` com `"rootDirectory": "web"` e `engines.node: "24.x"`. Se o Project Settings ainda apontar Node 20 ou Root Directory vazio, o próximo deploy deve herdar esses valores do repo.
+O Next.js está na **raiz** do repositório (compatível com Root Directory padrão).  
+Runtime: `engines.node: "24.x"` + `.nvmrc`.  
+A API Fastify fica em `backend/` (não usa a pasta `api/` da Vercel).
 
 ## OAuth (Google, Facebook, GitHub, Apple)
 
-Preencha as variáveis no `api/.env`. Sem Client ID/Secret, os botões OAuth ficam no UI mas o provider só autentica depois de configurado. E-mail/senha funciona sem OAuth.
+Preencha as variáveis no `backend/.env`. Sem Client ID/Secret, os botões OAuth ficam no UI mas o provider só autentica depois de configurado. E-mail/senha funciona sem OAuth.
 
-Callbacks Better Auth (ajuste ao domínio da API):
+Callbacks Better Auth (ajuste ao domínio público do front/proxy):
 
 - `{BETTER_AUTH_URL}/api/auth/callback/google`
 - `{BETTER_AUTH_URL}/api/auth/callback/facebook`
@@ -89,8 +90,8 @@ Callbacks Better Auth (ajuste ao domínio da API):
 ### Ticketmaster
 No portal Ticketmaster você vê **Consumer Key** e **Consumer Secret**:
 
-| Campo no portal | Variável no `api/.env` / Railway | Uso |
-|-----------------|----------------------------------|-----|
+| Campo no portal | Variável no `backend/.env` / Railway | Uso |
+|-----------------|--------------------------------------|-----|
 | Consumer Key | `TICKETMASTER_API_KEY` (ou `TICKETMASTER_CONSUMER_KEY`) | Discovery API (`apikey`) — **obrigatória** para inventário BR ao vivo |
 | Consumer Secret | `TICKETMASTER_CONSUMER_SECRET` | Reservada (OAuth/commerce). A Discovery pública **não** usa |
 

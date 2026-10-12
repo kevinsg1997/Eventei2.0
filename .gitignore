@@ -13,3 +13,11 @@ api/.agents
 api/.claude
 api/.windsurf
 api/skills-lock.json
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Env
+.env*.local
