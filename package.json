@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.1.0",
   "description": "Eventei — descoberta de eventos no Brasil",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev:api": "npm run dev --prefix api",
     "dev:web": "npm run dev --prefix web",

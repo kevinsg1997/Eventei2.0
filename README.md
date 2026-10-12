@@ -22,7 +22,7 @@ legacy/    Protótipo HTML antigo (faculdade)
 
 ### Pré-requisitos
 
-- Node.js 20+
+- Node.js 24.x (Vercel / engines)
 - PostgreSQL
 
 ### Banco
