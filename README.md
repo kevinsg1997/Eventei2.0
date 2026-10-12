@@ -69,6 +69,10 @@ npm run dev
 
 Front em `http://localhost:3000`.
 
+### Vercel (preview)
+
+O app Next.js fica em `web/`. O repositório inclui `vercel.json` com `"rootDirectory": "web"` e `engines.node: "24.x"`. Se o Project Settings ainda apontar Node 20 ou Root Directory vazio, o próximo deploy deve herdar esses valores do repo.
+
 ## OAuth (Google, Facebook, GitHub, Apple)
 
 Preencha as variáveis no `api/.env`. Sem Client ID/Secret, os botões OAuth ficam no UI mas o provider só autentica depois de configurado. E-mail/senha funciona sem OAuth.
