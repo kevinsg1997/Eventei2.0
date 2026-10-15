@@ -9,11 +9,13 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "start": "tsx src/index.ts",
-    "build": "tsc --noEmit",
+    "build": "prisma generate && tsc --noEmit",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
+    "db:migrate:deploy": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
+    "railway:predeploy": "prisma generate && prisma migrate deploy && tsx prisma/seed.ts",
     "test:providers": "tsx src/providers/ticketmaster.test.ts"
   },
   "prisma": {
@@ -28,13 +30,13 @@
     "better-auth": "^1.4.18",
     "dotenv": "^17.3.1",
     "fastify": "^5.8.2",
+    "prisma": "^6.19.0",
+    "tsx": "^4.21.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^25.5.0",
-    "prisma": "^6.19.0",
-    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }

@@ -68,11 +68,23 @@ npm run dev
 
 Front em `http://localhost:3000`.
 
-### Vercel (preview)
+### Vercel (preview / produção)
 
 O Next.js está na **raiz** do repositório (compatível com Root Directory padrão).  
 Runtime: `engines.node: "24.x"` + `.nvmrc`.  
 A API Fastify fica em `backend/` (não usa a pasta `api/` da Vercel).
+
+### Railway (API)
+
+No serviço da API:
+
+1. **Root Directory** = `backend`
+2. **Pre-deploy Command** = `npm run railway:predeploy`  
+   (equivale a `prisma generate && prisma migrate deploy && tsx prisma/seed.ts`)
+3. **Custom Start Command** = `npm start`
+4. Variáveis: `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `WEB_URL`, `TICKETMASTER_API_KEY`, etc.
+
+`prisma` e `tsx` ficam em `dependencies` para o pre-deploy funcionar com `NODE_ENV=production`.
 
 ## OAuth (Google, Facebook, GitHub, Apple)
 
