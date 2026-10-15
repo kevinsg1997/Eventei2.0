@@ -15,7 +15,8 @@
     "db:migrate:deploy": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
-    "railway:predeploy": "prisma generate && prisma migrate deploy && tsx prisma/seed.ts",
+    "railway:predeploy": "node scripts/railway-predeploy.mjs",
+    "start:railway": "npx prisma generate && npx prisma migrate deploy && npm start",
     "test:providers": "tsx src/providers/ticketmaster.test.ts"
   },
   "prisma": {
