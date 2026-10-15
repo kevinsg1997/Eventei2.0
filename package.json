@@ -1,0 +1,39 @@
+{
+  "name": "eventei",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Eventei \u2014 descoberta de eventos no Brasil",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "dev:web": "next dev",
+    "dev:api": "npm run dev --prefix backend",
+    "build:web": "next build",
+    "build:api": "npm run build --prefix backend",
+    "db:migrate": "npm run db:migrate --prefix backend",
+    "db:seed": "npm run db:seed --prefix backend",
+    "db:push": "npm run db:push --prefix backend"
+  },
+  "dependencies": {
+    "better-auth": "^1.7.7",
+    "next": "^16.4.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20.19.43",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

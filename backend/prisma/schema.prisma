@@ -1,0 +1,185 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  user
+  admin
+}
+
+enum UserStatus {
+  active
+  banned
+}
+
+enum EventSource {
+  user
+  ticketmaster
+  mapa_cultura
+  subcena
+}
+
+enum ReportStatus {
+  pending
+  accepted
+  rejected
+}
+
+model User {
+  id            String     @id @default(cuid())
+  name          String
+  email         String
+  emailVerified Boolean    @default(false)
+  image         String?
+  role          Role       @default(user)
+  status        UserStatus @default(active)
+  bannedAt      DateTime?
+  banReason     String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  sessions         Session[]
+  accounts         Account[]
+  events           Event[]           @relation("EventAuthor")
+  favorites        Favorite[]
+  calendarEntries  CalendarEntry[]
+  reportsFiled     Report[]          @relation("ReportsFiled")
+  reportsResolved  Report[]          @relation("ReportsResolved")
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model Event {
+  id           String      @id @default(cuid())
+  title        String
+  description  String      @default("")
+  startsAt     DateTime
+  endsAt       DateTime?
+  city         String
+  state        String?
+  country      String      @default("BR")
+  address      String?
+  venueName    String?
+  category     String?
+  imageUrl     String?
+  isFree       Boolean     @default(false)
+  priceLabel   String?
+  externalUrl  String?
+  source       EventSource
+  externalId   String?
+  authorId     String?
+  author       User?       @relation("EventAuthor", fields: [authorId], references: [id], onDelete: SetNull)
+  published    Boolean     @default(true)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  favorites       Favorite[]
+  calendarEntries CalendarEntry[]
+  reports         Report[]
+
+  @@unique([source, externalId])
+  @@index([city])
+  @@index([startsAt])
+  @@index([source])
+  @@map("event")
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  eventId   String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+  @@map("favorite")
+}
+
+model CalendarEntry {
+  id        String   @id @default(cuid())
+  userId    String
+  eventId   String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+  @@map("calendar_entry")
+}
+
+model Report {
+  id           String       @id @default(cuid())
+  eventId      String
+  reporterId   String
+  reason       String
+  details      String?
+  status       ReportStatus @default(pending)
+  resolvedById String?
+  resolvedAt   DateTime?
+  resolution   String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  event      Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  reporter   User  @relation("ReportsFiled", fields: [reporterId], references: [id], onDelete: Cascade)
+  resolvedBy User? @relation("ReportsResolved", fields: [resolvedById], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([eventId])
+  @@map("report")
+}
