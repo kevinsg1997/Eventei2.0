@@ -1,0 +1,7 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+preDeployCommand = ["npm run railway:predeploy"]
+startCommand = "npm start"
+restartPolicyType = "ON_FAILURE"

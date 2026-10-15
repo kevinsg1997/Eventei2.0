@@ -80,9 +80,11 @@ No serviço da API:
 
 1. **Root Directory** = `backend`
 2. **Pre-deploy Command** = `npm run railway:predeploy`  
-   (equivale a `prisma generate && prisma migrate deploy && tsx prisma/seed.ts`)
-3. **Custom Start Command** = `npm start`
+   (`prisma generate` + `migrate deploy` + seed; seed não derruba o deploy)
+3. **Custom Start Command** = `npm start`  
+   Se o pre-deploy continuar falhando, limpe o Pre-deploy e use Start = `npm run start:railway`
 4. Variáveis: `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `WEB_URL`, `TICKETMASTER_API_KEY`, etc.
+5. Confirme que o Postgres está **conectado/linkado** a esse serviço (variável `DATABASE_URL` presente).
 
 `prisma` e `tsx` ficam em `dependencies` para o pre-deploy funcionar com `NODE_ENV=production`.
 
