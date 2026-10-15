@@ -1,9 +1,24 @@
+/** Ensure absolute URLs always include http(s):// (Vercel/Better Auth require it). */
+export function normalizeAbsoluteUrl(
+  raw: string | undefined,
+  fallback: string,
+): string {
+  const value = (raw ?? fallback).trim().replace(/\/+$/, "");
+  if (!value) return fallback;
+  if (value.startsWith("http://") || value.startsWith("https://")) return value;
+  if (value.startsWith("/")) return value;
+  return `https://${value}`;
+}
+
 /** Browser calls same-origin proxy; server can hit the API directly. */
 function getApiBase() {
   if (typeof window !== "undefined") {
     return "/backend";
   }
-  return process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+  return normalizeAbsoluteUrl(
+    process.env.NEXT_PUBLIC_API_URL,
+    "http://localhost:4000",
+  );
 }
 
 export type ApiEvent = {
@@ -120,6 +135,15 @@ export const api = {
     }),
 };
 
-/** Public origin used by Better Auth client (same-origin via Next rewrite). */
+/**
+ * Public origin used by Better Auth client (same-origin via Next rewrite).
+ * Prefer the browser origin at runtime so Production works even if the env
+ * host was saved without https://.
+ */
 export const AUTH_BASE_URL =
-  process.env.NEXT_PUBLIC_WEB_URL ?? "http://localhost:3001";
+  typeof window !== "undefined"
+    ? window.location.origin
+    : normalizeAbsoluteUrl(
+        process.env.NEXT_PUBLIC_WEB_URL,
+        "http://localhost:3000",
+      );
